@@ -7,3 +7,5 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(ChillifyApp());
 }
+
+// TODO flutter foreground task iOS side integration

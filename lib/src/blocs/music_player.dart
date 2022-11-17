@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:music_app/src/helpers/foreground_task_helper.dart';
 import 'package:music_app/src/helpers/music_helper.dart';
 import 'package:music_app/src/helpers/text_helper.dart';
 import 'package:music_app/src/models/album.dart';
@@ -66,15 +67,18 @@ class MusicPlayerBloc {
     // _audioPlayer.play(AssetSource(song.uri));
     // _audioPlayer.play(UrlSource(song.uri));
     updatePlayerState(PlayerState.playing, song);
+    ForegroundTaskHelper.startForegroundTask();
   }
 
   void pauseMusic(Song song) {
     _audioPlayer.pause();
     updatePlayerState(PlayerState.paused, song);
+    ForegroundTaskHelper.stopForegroundTask();
   }
 
   void stopMusic() {
     _audioPlayer.stop();
+    ForegroundTaskHelper.stopForegroundTask();
   }
 
   void updatePlayerState(PlayerState state, Song song) {
